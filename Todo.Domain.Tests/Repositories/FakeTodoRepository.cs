@@ -15,14 +15,34 @@ public class FakeTodoRepository : ITodoRepository
         
     }
 
+    public void Update(TodoItem todo)
+    {
+        
+    }
+
+    public IEnumerable<TodoItem> GetAll(string User)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<TodoItem> GetAllDone(string User)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<TodoItem> GetAllUndone(string User)
+    {
+        throw new NotImplementedException();
+    }
+
     public TodoItem GetById(Guid id, string user)
     {
         return new TodoItem("Titulo aqui", DateTime.Now, user);
     }
 
-    public void Update(TodoItem todo)
+    public IEnumerable<TodoItem> GetByPeriod(string User, DateTime date, bool done)
     {
-        
+        throw new NotImplementedException();
     }
 
 }
