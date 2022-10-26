@@ -9,7 +9,10 @@ namespace Todo.Domain.Commands.Handlers;
 
 public class TodoHandler :
     Notifiable<Notification>,
-    IHandler<CreateTodoCommand>
+    IHandler<CreateTodoCommand>,
+    IHandler<UpdateTodoCommand>,
+    IHandler<MarkToDoAsDoneCommand>,
+    IHandler<MarkTodoAsUndoneCommand>
 {
     private readonly ITodoRepository _repository;
 
@@ -33,5 +36,60 @@ public class TodoHandler :
 
         return new GenericCommandResult(true, "Sucesso", todo);
 
+    }
+    public ICommandResult Handle(UpdateTodoCommand command)
+    {
+        //Fail Fast Validation
+        command.Validate();
+        if (!command.IsValid)
+            return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+        //Recuperar o TodoItem
+        var todo = _repository.GetById(command.Id, command.User);
+
+        //Salva no banco
+        todo.UpdateTitle(command.Title);
+
+        //Salva no banco
+        _repository.Update(todo);
+
+        return new GenericCommandResult(true, "Sucesso", todo);
+
+    }
+    public ICommandResult Handle(MarkToDoAsDoneCommand command)
+    {
+        //Fail Fast Validation
+        command.Validate();
+        if (!command.IsValid)
+            return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+        //Recuperar o TodoItem
+        var todo = _repository.GetById(command.Id, command.User);
+
+        //Altera o estado
+        todo.MarkAsDone(); 
+        
+        //Salva no banco
+        _repository.Update(todo);
+
+        return new GenericCommandResult(true, "Sucesso", todo);
+    }
+    public ICommandResult Handle(MarkTodoAsUndoneCommand command)
+    {
+        //Fail Fast Validation
+        command.Validate();
+        if (!command.IsValid)
+            return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+        //Recuperar o TodoItem
+        var todo = _repository.GetById(command.Id, command.User);
+
+        //Altera o estado
+        todo.MarkAsUndone();
+
+        //Salva no banco
+        _repository.Update(todo);
+
+        return new GenericCommandResult(true, "Sucesso", todo);
     }
 }
