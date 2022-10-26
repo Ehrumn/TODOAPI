@@ -1,8 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using Todo.Domain.Api.Repositories;
-using Todo.Domain.Commands.Handlers;
-using Todo.Domain.Infra.Context;
-using Todo.Domain.Repositories;
+global using Microsoft.EntityFrameworkCore;
+global using Todo.Domain.Api.Repositories;
+global using Todo.Domain.Commands.Handlers;
+global using Todo.Domain.Infra.Context;
+global using Todo.Domain.Repositories;
+global using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 

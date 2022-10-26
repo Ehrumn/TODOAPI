@@ -22,7 +22,7 @@ public class UpdateTodoCommand : Notifiable<Notification>, ICommand
     {
         AddNotifications(new Contract<CreateTodoCommand>()
         .Requires()
-        .IsLowerThan(Title, 3, "Title", "Descreva melhor esta tarefa")
-        .IsLowerThan(User, 6, "User", "Usuário inválido"));
+        .IsGreaterThan(Title, 3, "Title", "Descreva melhor esta tarefa")
+        .IsGreaterThan(User, 5, "User", "Usuário inválido"));
     }
 }

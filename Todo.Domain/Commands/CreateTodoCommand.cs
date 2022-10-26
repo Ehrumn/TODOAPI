@@ -26,6 +26,6 @@ public class CreateTodoCommand : Notifiable<Notification>, ICommand
         AddNotifications(new Contract<CreateTodoCommand>()
             .Requires()
             .IsGreaterThan(Title, 3, "Title", "Descreva melhor esta tarefa")
-            .IsGreaterThan(User, 6, "User", "Usuário inválido"));
+            .IsGreaterThan(User, 5, "User", "Usuário inválido"));
     }
 }

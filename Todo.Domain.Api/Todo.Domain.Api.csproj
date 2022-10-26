@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Todo.Domain.Infra\Todo.Domain.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NovaPasta\" />
+  </ItemGroup>
+
 </Project>

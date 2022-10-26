@@ -19,6 +19,6 @@ public class MarkTodoAsUndoneCommand : Notifiable<Notification>, ICommand
     {
         AddNotifications(new Contract<CreateTodoCommand>()
         .Requires()
-        .IsLowerThan(User, 6, "User", "Usuário inválido"));
+        .IsGreaterThan(User, 5, "User", "Usuário inválido"));
     }
 }
