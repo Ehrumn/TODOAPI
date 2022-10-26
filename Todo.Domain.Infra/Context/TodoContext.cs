@@ -5,20 +5,20 @@ namespace Todo.Domain.Infra.Context;
 
 public class TodoContext : DbContext
 {
-	public TodoContext(DbContextOptions<TodoContext> options) : base(options)
+	public TodoContext(DbContextOptions<TodoContext> options) 
+		: base(options)
 	{
-
 	}
 	public DbSet<TodoItem> Todos { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	protected override void OnModelCreating(ModelBuilder Builder)
 	{
-		modelBuilder.Entity<TodoItem>().ToTable("Todo");
-		modelBuilder.Entity<TodoItem>().Property(x => x.Id);
-		modelBuilder.Entity<TodoItem>().Property(x => x.User).HasMaxLength(120).HasColumnType("varchar(120)");
-		modelBuilder.Entity<TodoItem>().Property(x => x.Title).HasMaxLength(160).HasColumnType("varchar(160)");
-		modelBuilder.Entity<TodoItem>().Property(x => x.Done);
-		modelBuilder.Entity<TodoItem>().Property(x => x.Date);
-		modelBuilder.Entity<TodoItem>().HasIndex(b => b.User);
+		Builder.Entity<TodoItem>().ToTable("Todo");
+		Builder.Entity<TodoItem>().Property(x => x.Id);
+		Builder.Entity<TodoItem>().Property(x => x.User).HasMaxLength(120).HasColumnType("varchar(120)");
+		Builder.Entity<TodoItem>().Property(x => x.Title).HasMaxLength(160).HasColumnType("varchar(160)");
+		Builder.Entity<TodoItem>().Property(x => x.Done).HasColumnType("bit");
+		Builder.Entity<TodoItem>().Property(x => x.Date);
+		Builder.Entity<TodoItem>().HasIndex(b => b.User);
 	}
 }
